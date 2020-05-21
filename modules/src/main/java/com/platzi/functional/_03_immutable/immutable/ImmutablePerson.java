@@ -34,6 +34,8 @@ public final class ImmutablePerson {
         return lastName;
     }
 
+    //Aqui se genera inmutabilidad a partir de que retornamos una nueva lista,
+    // no permitimos que lo ya existente se modifique
     public final List<String> getEmails() {
         return new LinkedList<>(emails);
     }
