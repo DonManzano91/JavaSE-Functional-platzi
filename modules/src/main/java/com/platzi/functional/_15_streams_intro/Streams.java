@@ -21,5 +21,24 @@ public class Streams {
         Stream<String> enfasisCurso = streamCursos.map(curso -> curso + "!");
         Stream<String> cursoJava = enfasisCurso.filter(curso -> curso.contains("Java"));
         cursoJava.forEach(System.out::println);
+
+        /*Aqui se ve como se puede aplicar chaining en el uso de Streams que son invocados desde objetos que aplican
+        * la interfaz collection*/
+        Stream<String> streamCursos2 = listaCursos.stream();
+        streamCursos2.map(curso -> curso + "!!")
+                .filter(curso -> curso.contains("Java"))
+                .forEach(System.out::println); //En este punto se considera que se esta ejecutando una operación final
+
+        /*Aplicando la nueva función que hara una operación intermedia*/
+        agregaOperador(
+        streamCursos2.map(curso -> curso + "!!")
+                .filter(curso -> curso.contains("Java"))
+        ).forEach(System.out::println);
+    }
+
+    static <T> Stream<T> agregaOperador(Stream<T> stream){
+        return stream.peek(dato -> System.out.println("Dato: "+ dato));/*Recibe un consumer pero no modifica los datos,
+                                entran y salen, pero podremos verlos
+                                sin modificar o alterar el string*/
     }
 }
